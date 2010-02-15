@@ -1,0 +1,8 @@
+CHANGELOG OF JS FRAMEWORK
+
+02.02.10
+fixed the onend and onabort events in element.js
+found a bug in main.js in opera (browser/engine)
+added new things to apt.txt
+
+

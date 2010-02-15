@@ -1,0 +1,257 @@
+API JS FRAMEWORK
+
+-----------------v1.0.6-------------------
+
+main.js:
+
+	-------------------------------------
+	framew.version = aktuelleVersion
+	framew.libs = ["element", "event", "ajax", "animation", "json", "selector", "drag", "slider"]
+	framew.include(libs[array]|all[string], [options])
+		Bindet alle Dateien libs in das Dokument ein. Wenn all dann werden alle Dateien framew.libs
+		eingebunden. href = options.base + "/" + lib
+
+
+	-------------------------------------
+	$(elemen[element]|id[string]) return element;
+		Wenn id dann getElementById(id)
+		Alle Elemente mit $/$$ ansprechen damit die Methoden in allen Browsern verfügbar sind
+	
+	$type(whatever) return string;
+		Gibt den Typ des übergebenen Parameters zurück
+			*window
+			*document
+			*number
+			*function
+			*string
+			*boolean
+			*element
+			*collection
+			*whitespace
+			*textnode
+			*regexp
+			*array
+			*date
+			*object
+
+	$defined(whatever) return boolean
+		Gibt true zurück wenn whatever definiert ist dh.(whatever != "undefined" && whatever != null)
+
+	$each(array[array]|object[object], funktion[function]) return null|false;
+		Ruft mit jedem Element und dem dazugehörigem Schlüssel im Array|Objekt die Funktion function auf.
+
+	$lambda(whatever) return function
+		Gibt eine Funktion zurück, welche den den Wert whatever zurückgibt.
+
+	$splat(whatever) return array
+		 Wandelt whatever in ein Array um.
+
+	$random(min[int], max[int]) return number
+		Gibt einen Zufälligen Wert zwischen min und max zurück.
+
+	$try(f1[function], f2[function], ...fn) return whatever
+		Gibt den Wert der ersten Funktion zurück, welche keinen Fehler verursacht.
+
+	$clear(id[int])
+		Stoppt den Interval, der den Wert id zurückgegeben hat.
+
+	$A(interable[array|object|collection]) return array;
+		Wandelt iterable in ein Array um.
+
+
+	-------------------------------------
+	Array.foreach
+		Cross-browser
+
+
+	-------------------------------------
+	String.toCssSytax(attribut[string]) return string
+		Wandelt das attribut von der JS zur CSS syntax um. z.B. backgroundColor -> background-color
+
+	String.toJsSyntax(attribut[string]) return string
+		Wandelt das attribut von der CSS zur JS syntax um. z.B. background-color -> backgroundColor
+
+	String.hexToRgb(css[string]) return string
+		Wandelt alle rgb farbangaben (z.B. rgb(0,255,0)) im string css in hex Farbangaben (#00ff00) um.
+
+
+	-------------------------------------
+	Function.delay(ms[int], [bind|arguments])
+		führt die Funktion this in ms Millesekunden aus. bind->this arguments werden der Funktion übergeben
+
+	Function.periodical(ms[int], [bind|arguments]
+		führt die Funktion this alle ms Millesekunden aus. bind->this arguments werden der Funktion übergeben
+
+
+	-------------------------------------
+	Browser.Platform
+		name = win|mac|linux|ipod|other
+		win = true|undefined
+		mac = true|undefined
+		...
+	Browser.Engine
+		name = presto|trident|webkit|gecko
+		presto = true|false
+		trident = true|false
+		...
+
+
+
+element.js
+
+	-------------------------------------
+	Element.hasClass(className[string]) return true|false
+		Gibt true zurück wenn das Element className als Klasse hat.
+
+	Element.toogleClass(className[string])
+		Fügt className hinzu oder entfernt ihn.
+
+	Element.addClass(className[string])
+		Fügt className hinzu
+
+	Element.removeClass(className[string])
+		Entfernt className
+
+	Element.getStyle(attribut1[string], attribut2[string], ..attributn[string]) return string|array
+		Gibt den Wert des style-Attributs arrtibut1-attributn zurück.
+
+	Element.css(cssCode[string])
+		Setzt den cssCode.
+
+	Element.set(attributes[object])
+		setzt alle Werte, welche im attributes-Objekt enthalten sind.
+
+	Element.toggle(property[string])
+		Ändert die Eigenschaft property.
+
+	Element.render()
+		Rendert das Element neu.
+
+	Element.destroy()
+		Löscht das Element aus dem DOM-Baum.
+
+	Element.getElementsByClassName(className) return array
+		Cross-Browser
+		
+		
+	
+event.js	
+
+	-------------------------------------
+	Event.add(element[element], type[string], func[function], capture[boolean]) return id;
+		Fügt die Funktion func dem Element element dem event type zu.
+		Wenn capture aktiv dann zuerst Capturing danach Bubbling
+
+	Event.remove(element[element], type[string], id)
+		Löscht die Funktion auf dem Event type mit der id id(id = Event.add()).
+
+	Event.preventDefault()
+		Verhindert, dass die Standartmäsige Funktion ausgeführt wird. Wie return false;
+
+	Event.stopPropagation()
+		Verhindert das Event-bubbling/capturing
+
+	Event.stop()
+		Event.preventDefault() und Event.stopPropagation()
+
+	Event.geTarget() return element
+		gibt das Element zurück, auf welchem das Event ausgelöst wurde.
+
+	Event.getMouseButton() return left|middle|right
+		Gibt die gedrückte Maustaste zurück (nur ratsam bei mousedown, mouseup)
+
+	Event.getKey() reuturn string
+		Gibt die gedrückte Taste zurück. Neue Tasten können mit Event.keys.taste = asciZahl;
+
+
+	-------------------------------------
+	Element.addEvent(type[string], func[function], capture[boolean])
+		Event.add
+
+	Element.removeEvent(type[string], id)
+		Event.remove
+
+
+
+animation.js
+
+	-------------------------------------
+	morph.add(element, cssString, options)
+		options:
+			*duration [sec] default 1
+			*quality [int] 1 highest n lowest default 15
+			*transition default morph.transition.linear
+				+linear
+				+quadr
+				+sqrt
+				+x
+				+y
+				+z
+				+bounce
+			*queueList default default
+			*queue
+	element.morph(cssString, options)
+		Starten eine Animation
+
+	morph.addEvent(type[string], callback[function])
+		Fügt der Animation ein Event hinzu
+		type:
+			*add
+			*start
+			*update
+			*end
+			*abort
+
+	morph.stop()
+		Stoppt die Animation
+
+	morph.resume()
+		Bringt die Animation wieder in Gang
+
+	morph.end()
+		Beendet die Animation
+		kann setEndValue übergeben werden
+
+
+
+selector.js
+
+	-------------------------------------
+	selector.apply(cssSelector, element|)
+		gibt alle Elemente zurück, die auf den css-Selector passen. von element aus gesehen oder document
+
+	$$(array|collection|element|string, array|collection|element|string, ...)
+		Parst alle Elemente. String kann ein Selector oder ein tagName sein.
+	
+	Element.getElements(selector)
+		wie $$ nur dass alles vom Element this aus geht.
+
+	
+drag.js
+
+	-------------------------------------
+	dragelement(element, options[objekt])
+		Lässt ein beliebiges HTML-Element per drag and drop bewegen (ACHTUNG! setzt position:absolute; )
+		options:
+			* toBody[boolean] setzt das Element direkt in den body der seite
+			* xAxis[boolean] ob drag and drop auf der x-Achse erlaubt ist
+			* yAxis wie xAxis
+			* borders[element] grenzt das drag and drop in dem Element borders ein
+			* ignoreBordersX[boolean] ignoriert die horizontale Grenze von borders
+			* ignoreBordersY[boolean] wie gnoreBordersX
+			* opacity[false|int] setzt die Transparent beim Draggen
+			* zIndex[false|int] setzt den zIndex beim Draggen
+			* scroll[boolean] soll das Element beim Scrollen mit verschoben werden
+			* ghosting[boolean] ob der Ursprungspunkt beim Draggen angezeigt wird
+			* ghsotingClass[string] welchen Klassenname das Element während des Dragvorgangs bekommt
+			* ghostingStyle[objekt] styles die das Element während des Dragvorgangs bekommt als literales Objekt
+			* steps[false|array[int]] in welchen Schritten das Objekt bewegt wird und ob es in Schritten bewegt wird 
+
+
+
+slider.js
+	
+ajax.js
+	
+json.js
+	
