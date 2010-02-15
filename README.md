@@ -8,12 +8,17 @@ dojs javascript framework
 		<script type="text/javascript" src="dojs/src/main.js"></script>
 
 2. use dojs.include(files, options) to include the required files
+
 	> files can be an array of strings
 
-			["element.js", "event.js"]
+			dojs.include(["element.js", "event.js"]);
 
 	> or a string "all" for including all files of dojs
 
-			"all"
+			dojs.include("all");
+
+	> you can set a path which is set in front of all files
+
+			dojs.include(["element.js", "event.js"], {base:"some/other/src"});
 
 
