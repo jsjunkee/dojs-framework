@@ -10,7 +10,7 @@ dojs javascript framework
 2. use dojs.include(files, options) to include the required files
 	> files can be an array of strings
 
-	>	["element.js", "event.js"]
+			["element.js", "event.js"]
 
 	> or a string "all" for including all files of dojs
 
